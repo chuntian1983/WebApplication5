@@ -1,0 +1,18 @@
+﻿1.启用数据迁移
+
+在控制台中输入如下命令：Enable-Migrations
+2.增加迁移项
+
+增加迁移项需要我们手工来进行，在程序包管理器控制台中，输入如下命令：
+
+Add-Migration Add_Annotation_Name_Major
+3.更新到数据库
+
+此时，数据库尚未改变，我们还需要手工命令来更新数据库：
+
+Update-Database
+///////////////
+4.在真实的项目中，数据库可能部署在远程服务器中，这时我们就不能直接在VS中通过Update-Database来更新数据库了。
+
+不过我们可以生成更新SQL脚本，然后拿到数据库服务器上执行。生成这个SQL脚本的方法：
+Update-Database -Script -SourceMigration: InitialCreate -TargetMigration: Add_Annotation_Name_Major
